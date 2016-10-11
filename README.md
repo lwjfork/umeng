@@ -135,4 +135,46 @@
     }
 }
    ```
+   
+4. 如果不想在    AndroidManifest.xml 加入label 属性  可以通过类名来定义别名可以采取以下方案
+  1. 在string.xml 里定义 string 资源  **name** 是 你想要统计的类名   **value** 是你统计的类名的别名
+  2. 然后定义一下 UmengActivityLife或者UmengFragmentLife并注入
+ 
+  MyUmengActivityLife 的例子：
   
+  ```
+  public class MyUmengActivityLife extends AbsActivityLife {
+
+    @Override
+    public void onResume(Activity _activity) {
+        super.onResume(_activity);
+        AnalysisUtil.onResume(_activity, getName(_activity));
+    }
+
+    @Override
+    public void onPause(Activity _activity) {
+        super.onPause(_activity);
+        AnalysisUtil.onPause(_activity, getName(_activity));
+
+    }
+
+
+    private String getName(Activity _activity) {
+        String acName = _activity.getClass().getSimpleName();
+        int strResId = _activity.getResources().getIdentifier(acName, "string", _activity.getPackageName());
+        if (strResId <= 0) {
+            return acName;
+        } else {
+            String name = _activity.getString(strResId);
+            if (name.length() == 0) {
+                return acName;
+            } else {
+                return name;
+            }
+        }
+    }
+}
+
+  
+  ```
+ 
