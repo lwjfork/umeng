@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">demo</string>
+    <string name="MainActivity">主页</string>
+    <string name="MainActivity_label">主页_label</string>
+    <string name="SingleActivity">单一activity</string>
+    <string name="SingleActivity_label">单一activity_label</string>
+    <string name="TestActivity">含有fragment的activity</string>
+    <string name="TestActivity_label">含有fragment的activity_label</string>
+    <string name="TestFragment">fragment页面</string>
+
+</resources>

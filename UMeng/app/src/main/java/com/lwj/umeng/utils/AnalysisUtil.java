@@ -43,8 +43,10 @@ public class AnalysisUtil {
         String acName = ac.getClass().getSimpleName().toString();
         onResume(ac, isPage, acName);
     }
+
     /**
-     *  自定义页面名称
+     * 自定义页面名称
+     *
      * @param ac
      * @param eventId
      */
@@ -69,6 +71,7 @@ public class AnalysisUtil {
 
         MobclickAgent.onPause(ac);
     }
+
     public static void onPause(Activity ac) {
         String acName = ac.getClass().getSimpleName().toString();
         if (ac instanceof FragmentActivity) {
@@ -82,10 +85,12 @@ public class AnalysisUtil {
             onPause(ac, true, acName);
         }
     }
+
     public static void onPause(Activity ac, boolean isPage) {
         String acName = ac.getClass().getSimpleName().toString();
         onPause(ac, isPage, acName);
     }
+
     public static void onPause(Activity ac, String eventId) {
         if (ac instanceof FragmentActivity) {
             List<Fragment> fragments = ((FragmentActivity) ac).getSupportFragmentManager().getFragments();
@@ -100,10 +105,6 @@ public class AnalysisUtil {
     }
 
 
-
-
-
-
     public static void onPause(Fragment fg) {
         if (fg != null) {
             String fgClass = fg.getClass().getSimpleName().toString();
@@ -112,10 +113,24 @@ public class AnalysisUtil {
 
     }
 
+    public static void onPause(Fragment fg, String eventId) {
+        if (fg != null) {
+            MobclickAgent.onPageEnd(eventId);
+        }
+
+    }
+
     public static void onResume(Fragment fg) {
         if (fg != null) {
             String fgClass = fg.getClass().getSimpleName().toString();
             MobclickAgent.onPageStart(fgClass);
+        }
+
+    }
+
+    public static void onResume(Fragment fg, String eventId) {
+        if (fg != null) {
+            MobclickAgent.onPageStart(eventId);
         }
 
     }
