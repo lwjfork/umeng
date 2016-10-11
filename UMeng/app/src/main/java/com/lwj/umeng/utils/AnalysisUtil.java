@@ -5,81 +5,107 @@ import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 
+import com.umeng.analytics.MobclickAgent;
+
 import java.util.HashMap;
 import java.util.List;
 
 /**
  * Created by lwj on 2015/8/6.
- *
  */
 public class AnalysisUtil {
     public AnalysisUtil() {
     }
 
-    public static void onResume(Activity ac) {
-        if(ac instanceof FragmentActivity){
-
-            List<Fragment> fragments = ((FragmentActivity) ac).getSupportFragmentManager().getFragments();
-            if(null != fragments && fragments.size() >0){
-                onResume(ac, false);
-            }else {
-                onResume(ac, true);
-            }
-        }else {
-            onResume(ac, true);
-        }
-    }
-
-    public static void onResume(Activity ac, boolean isPage) {
-        String acName = ac.getClass().getSimpleName().toString();
-        onResume(ac, isPage, acName);
-    }
-
-    public static void onResume(Activity ac, String eventId) {
-        onResume(ac, true, eventId);
-    }
-
     public static void onResume(Activity ac, boolean isPage, String eventId) {
-        if(isPage) {
+        if (isPage) {
             MobclickAgent.onPageStart(eventId);
         }
 
         MobclickAgent.onResume(ac);
     }
 
-    public static void onPause(Activity ac, String eventId) {
-        onPause(ac, true, eventId);
-    }
-
-    public static void onPause(Activity ac, boolean isPage) {
-        String acName = ac.getClass().getSimpleName().toString();
-        onPause(ac, isPage, acName);
-    }
-
-    public static void onPause(Activity ac) {
-        String acName = ac.getClass().getSimpleName().toString();
-        if(ac instanceof FragmentActivity){
+    public static void onResume(Activity ac) {
+        if (ac instanceof FragmentActivity) {
             List<Fragment> fragments = ((FragmentActivity) ac).getSupportFragmentManager().getFragments();
-            if(null != fragments && fragments.size() >0){
-                onPause(ac, false, acName);
-            }else {
-                onPause(ac, true, acName);
+            if (null != fragments && fragments.size() > 0) {
+                onResume(ac, false);
+            } else {
+                onResume(ac, true);
             }
-        }else {
-            onPause(ac, true, acName);
+        } else {
+            onResume(ac, true);
         }
     }
 
+
+    public static void onResume(Activity ac, boolean isPage) {
+        String acName = ac.getClass().getSimpleName().toString();
+        onResume(ac, isPage, acName);
+    }
+    /**
+     *  自定义页面名称
+     * @param ac
+     * @param eventId
+     */
+    public static void onResume(Activity ac, String eventId) {
+        if (ac instanceof FragmentActivity) {
+            List<Fragment> fragments = ((FragmentActivity) ac).getSupportFragmentManager().getFragments();
+            if (null != fragments && fragments.size() > 0) {
+                onResume(ac, false, eventId);
+            } else {
+                onResume(ac, true, eventId);
+            }
+        } else {
+            onResume(ac, true, eventId);
+        }
+    }
+
+
     public static void onPause(Activity ac, boolean isPage, String eventId) {
-        if(isPage) {
+        if (isPage) {
             MobclickAgent.onPageEnd(eventId);
         }
 
         MobclickAgent.onPause(ac);
     }
+    public static void onPause(Activity ac) {
+        String acName = ac.getClass().getSimpleName().toString();
+        if (ac instanceof FragmentActivity) {
+            List<Fragment> fragments = ((FragmentActivity) ac).getSupportFragmentManager().getFragments();
+            if (null != fragments && fragments.size() > 0) {
+                onPause(ac, false, acName);
+            } else {
+                onPause(ac, true, acName);
+            }
+        } else {
+            onPause(ac, true, acName);
+        }
+    }
+    public static void onPause(Activity ac, boolean isPage) {
+        String acName = ac.getClass().getSimpleName().toString();
+        onPause(ac, isPage, acName);
+    }
+    public static void onPause(Activity ac, String eventId) {
+        if (ac instanceof FragmentActivity) {
+            List<Fragment> fragments = ((FragmentActivity) ac).getSupportFragmentManager().getFragments();
+            if (null != fragments && fragments.size() > 0) {
+                onPause(ac, false, eventId);
+            } else {
+                onPause(ac, true, eventId);
+            }
+        } else {
+            onPause(ac, true, eventId);
+        }
+    }
+
+
+
+
+
 
     public static void onPause(Fragment fg) {
-        if(fg != null) {
+        if (fg != null) {
             String fgClass = fg.getClass().getSimpleName().toString();
             MobclickAgent.onPageEnd(fgClass);
         }
@@ -87,7 +113,7 @@ public class AnalysisUtil {
     }
 
     public static void onResume(Fragment fg) {
-        if(fg != null) {
+        if (fg != null) {
             String fgClass = fg.getClass().getSimpleName().toString();
             MobclickAgent.onPageStart(fgClass);
         }
