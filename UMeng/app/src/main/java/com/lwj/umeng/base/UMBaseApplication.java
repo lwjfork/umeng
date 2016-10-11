@@ -40,6 +40,10 @@ public class UMBaseApplication extends Application {
      * 对生命周期进行 友盟 注入
      */
     private void initActivitySubscriber() {
+        /**
+         *  此处的 UmengActivityLife和UmengFragmentLife  是一个默认的实现
+         *  你也可以使用实现AbsActivityLife或者AbsFragmentLife 来自定义自己的统计页面
+         */
         UMengBaseActivity.addSubscriber(new UmengActivityLife());
         UMengBaseFragment.addSubscriber(new UmengFragmentLife());
 
