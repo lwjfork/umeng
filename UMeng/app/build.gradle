@@ -22,3 +22,4 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     provided "com.android.support:appcompat-v7:$SLVersion"
 }
+//apply from: "https://raw.githubusercontent.com/lwjRes/scriptlib/master/gradle/bintray.gradle"
